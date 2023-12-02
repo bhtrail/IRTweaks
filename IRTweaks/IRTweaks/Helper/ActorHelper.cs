@@ -6,6 +6,10 @@ namespace IRTweaks.Helper
 
     public static class ActorHelper
     {
+        public static bool CanPronedBeAttacked(this ICombatant actor)
+        {
+            return actor.IsProne && Mod.Config.Combat.CalledShot.EnablePronedAsTarget;
+        }
         public static bool CanAlwaysUseCalledShot(this AbstractActor actor)
         {
             Statistic stat = actor.StatCollection.GetStatistic(ModStats.CalledShot_AlwaysAllow);

@@ -35,7 +35,8 @@ namespace IRTweaks.Modules.Combat
                 Mod.Log.Trace?.Write("HUDMAR:SHA entered");
 
                 bool attackerCanAlwaysMakeCalledShot = __instance.HUD.SelectedActor.CanAlwaysUseCalledShot();
-                bool targetCanBeCalledShot = __instance.HUD.SelectedTarget.IsShutDown || __instance.HUD.SelectedTarget.IsProne || attackerCanAlwaysMakeCalledShot;
+                bool pronedCanBeAttacked = __instance.HUD.SelectedTarget.CanPronedBeAttacked();
+                bool targetCanBeCalledShot = __instance.HUD.SelectedTarget.IsShutDown || pronedCanBeAttacked || attackerCanAlwaysMakeCalledShot;
 
                 Mod.Log.Debug?.Write($"  Hover - target:({__instance.displayedMech.DistinctId()}) canBeTargeted:{targetCanBeCalledShot} by attacker:({__instance.HUD.SelectedActor.DistinctId()})");
                 Mod.Log.Debug?.Write($"      isShutdown:{__instance.displayedMech.IsShutDown} isProne:{__instance.displayedMech.IsProne} canAlwaysCalledShot:{attackerCanAlwaysMakeCalledShot}");
@@ -64,7 +65,8 @@ namespace IRTweaks.Modules.Combat
             Mod.Log.Trace?.Write("SSF:SCS entered");
 
             bool attackerCanAlwaysMakeCalledShot = __instance.SelectedActor.CanAlwaysUseCalledShot();
-            bool targetCanBeCalledShot = __instance.TargetedCombatant.IsShutDown || __instance.TargetedCombatant.IsProne || attackerCanAlwaysMakeCalledShot;
+            bool pronedCanBeAttacked = __instance.TargetedCombatant.CanPronedBeAttacked();
+            bool targetCanBeCalledShot = __instance.TargetedCombatant.IsShutDown || pronedCanBeAttacked || attackerCanAlwaysMakeCalledShot;
 
             Mod.Log.Debug?.Write($"  Select - target:{__instance.TargetedCombatant.DistinctId()} canBeTargeted:{targetCanBeCalledShot} by attacker:{__instance.SelectedActor.DistinctId()}");
             Mod.Log.Debug?.Write($"      isShutdown:{__instance.TargetedCombatant.IsShutDown} isProne:{__instance.TargetedCombatant.IsProne} canAlwaysCalledShot:{attackerCanAlwaysMakeCalledShot}");
@@ -96,7 +98,8 @@ namespace IRTweaks.Modules.Combat
             Mod.Log.Trace?.Write("SSF:SCS entered");
 
             bool attackerCanAlwaysMakeCalledShot = __instance.SelectedActor.CanAlwaysUseCalledShot();
-            bool targetCanBeCalledShot = __instance.TargetedCombatant.IsShutDown || __instance.TargetedCombatant.IsProne || attackerCanAlwaysMakeCalledShot;
+            bool pronedCanBeAttacked = __instance.SelectedActor.CanPronedBeAttacked();
+            bool targetCanBeCalledShot = __instance.TargetedCombatant.IsShutDown || pronedCanBeAttacked || attackerCanAlwaysMakeCalledShot;
             if (!targetCanBeCalledShot && Mod.Config.Combat.CalledShot.DisableAllLocations)
             {
                 Mod.Log.Info?.Write($"  Disabling called shot from attacker: {__instance.SelectedActor.DistinctId()} against target vehicle: {__instance.TargetedCombatant.DistinctId()}");
@@ -117,7 +120,8 @@ namespace IRTweaks.Modules.Combat
             if (__result == true)
             {
                 bool attackerCanAlwaysMakeCalledShot = __instance.SelectedActor.CanAlwaysUseCalledShot();
-                bool targetCanBeCalledShot = __instance.TargetedCombatant.IsShutDown || __instance.TargetedCombatant.IsProne || attackerCanAlwaysMakeCalledShot;
+                bool pronedCanBeAttacked = __instance.SelectedActor.CanPronedBeAttacked();
+                bool targetCanBeCalledShot = __instance.TargetedCombatant.IsShutDown || pronedCanBeAttacked || attackerCanAlwaysMakeCalledShot;
                 if (!targetCanBeCalledShot && Mod.Config.Combat.CalledShot.DisableAllLocations)
                 {
                     Mod.Log.Debug?.Write($"  Disabling NeedsCalledShot from attacker: {__instance.SelectedActor.DistinctId()} against target vehicle: {__instance.TargetedCombatant.DistinctId()}");
@@ -223,7 +227,8 @@ namespace IRTweaks.Modules.Combat
                 selectionStateFire.SelectionType == SelectionType.FireMorale)
             {
                 bool attackerCanAlwaysMakeCalledShot = __instance.HUD.SelectedActor.CanAlwaysUseCalledShot();
-                bool targetCanBeCalledShot = __instance.DisplayedActor.IsShutDown || __instance.DisplayedActor.IsProne || attackerCanAlwaysMakeCalledShot;
+                bool pronedCanBeAttacked = __instance.HUD.SelectedActor.CanPronedBeAttacked();
+                bool targetCanBeCalledShot = __instance.DisplayedActor.IsShutDown || pronedCanBeAttacked || attackerCanAlwaysMakeCalledShot;
                 if (!targetCanBeCalledShot && Mod.Config.Combat.CalledShot.DisableAllLocations)
                 {
                     Mod.Log.Info?.Write($"  Disabling called shot popup from attacker: {__instance.HUD.SelectedActor.DistinctId()} against target vehicle: {__instance.DisplayedActor.DistinctId()}");

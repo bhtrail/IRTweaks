@@ -54,6 +54,7 @@ namespace IRTweaks
             public bool DisableAllLocations = true;
             public bool DisableHeadshots = true;
             public bool EnableTacticsModifier = true;
+            public bool EnablePronedAsTarget = true;
 
             public int BaseModifier = 6;
             public Dictionary<string, int> PilotTags = new Dictionary<string, int>();
